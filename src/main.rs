@@ -1,6 +1,9 @@
 // src/main.rs
 /*
  * Main executable for OracleNetwork
+ * 
+ * This is the entry point for the OracleNetwork application.
+ * It uses the clap crate to parse command line arguments and the oraclenetwork crate to run the application logic.
  */
 
 use clap::Parser;
@@ -13,16 +16,19 @@ struct Cli {
     #[arg(short, long)]
     verbose: bool,
     
-    /// Input file path
-    #[arg(short, long)]
+    /// Path to the input file
+    #[arg(short, long, default_value = "")]
     input: Option<String>,
     
-    /// Output file path
-    #[arg(short, long)]
+    /// Path to the output file
+    #[arg(short, long, default_value = "")]
     output: Option<String>,
 }
 
 fn main() -> Result<()> {
+    // Parse command line arguments
     let args = Cli::parse();
+    
+    // Run the application logic
     run(args.verbose, args.input, args.output)
 }
